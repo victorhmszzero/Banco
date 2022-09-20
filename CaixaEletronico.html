@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Aula 3 - Javascript</title>
+	<script>
+		var saldo = 100.5; //Float
+		var senha = 3589;
+
+        function login() {
+			alert("Bem Vindo ao Banco VH!");
+            var name = prompt("Insira o eu nome para o login");
+            if (isNaN(name)) {
+				alert("Olá " + name);
+		        console.log(name);
+				inicio();
+			} else {
+				alert('Insira um nome valido');
+				login();
+			}
+         }
+		function inicio() {
+			var escolha = parseInt(prompt('Selecione uma opção. | 1.saldo) | 2.extrato) | 3.Saque) | 4.Depósito) | 5.Transferência) | 6.Sair'));
+			switch(escolha) {
+  				case 1: escolha === 1;
+				    var password = parseInt(prompt("Digite sua senha"));
+				    if (password == 3589){ 
+						alert("Senha Incorreta")
+						ver_saldo();
+					}
+				    else{ inicio();}
+   					break;
+			    case 2: escolha === 2;
+				 	extrato();
+   					break;
+				case 3: escolha === 3;
+				  	checar_saque();
+   					break;
+				case 4: escolha === 4;
+				    fazer_deposito();
+   					break;
+			    case 5: escolha === 5;
+				    transferencia();
+   					break;
+			    case 6: escolha === 6;
+				  	checar_saque();
+   					break;
+ 				default:
+				 	erro();}
+		}
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6.');
+			inicio();
+		}
+
+		
+		
+		 //------------------------------------------------------------------------;
+		function ver_saldo() {
+			alert('Seu saldo atual é: R$ ' + saldo);
+			inicio();
+		}
+		 //------------------------------------------------------------------------;
+		function fazer_deposito() {
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			if (isNaN(deposito) || deposito === '') { // Not a Number
+				alert('Por favor, informe um número.');
+				fazer_deposito();
+			} else if (deposito <= 0){
+				alert("Operação não autorizada");
+				fazer_deposito();
+			} else 	{ //saldo = saldo + deposito;
+				saldo += deposito; 	
+				ver_saldo();
+			}
+		}
+		 //------------------------------------------------------------------------;
+		function checar_saque() {
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+			if (saque <= saldo){ fazer_saque(saque);} 
+			else{ 
+				alert("Operação não autorizada");
+				checar_saque();
+			}
+		}
+		function fazer_saque(saque) {
+			if (isNaN(saque) || saque === '') { // Not a Number
+				alert('Por favor, informe um número:');
+				checar_saque();
+			//} else if (saque <= 0){
+			//	alert("Operação não autorizada");
+			//	checar_saque(); 
+			} else { //saldo = saldo - saque;
+				saldo -= saque; 
+				ver_saldo();
+			}
+		}
+		 //------------------------------------------------------------------------;
+		function extrato() {
+			alert('Batata R$3,00, Batata R$3,00, Batata R$3,00, Batata R$3,00, Batata R$3,00, Batata R$3,00');
+			inicio();
+		}
+		 //------------------------------------------------------------------------;
+		function transferencia() {
+			var trasnfer = parseFloat(prompt('Informe o numero da conta bancaria que ira receber o valor'));
+			if (trasnfer >= 1 || !isNaN(trasnfer) || !trasnfer === ''){ 
+				checar_transferencia();
+			} 
+			else{ 
+				alert("Operação não autorizada");
+				transferencia();
+			}
+		}
+		function checar_transferencia() {
+			var trasnfer = parseFloat(prompt('Qual o valor para transfencia?'));
+			if (trasnfer <= saldo){ fazer_transferencia(trasnfer);} 
+			else{ 
+				alert("Operação não autorizada");
+				checar_transferencia();
+			}
+		}
+		function fazer_transferencia(trasnfer) {
+			if (isNaN(trasnfer) || trasnfer === '') { // Not a Number
+				alert('Por favor, informe um número:');
+				checar_transferencia();
+			} else { //saldo = saldo - saque;
+				alert('Transferencia realizada com Sucesso');
+				saldo -= trasnfer; 
+				ver_saldo();
+			}
+		}
+		 //------------------------------------------------------------------------;
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				login();
+			} else {
+				inicio();
+			}
+		}
+
+        login();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
