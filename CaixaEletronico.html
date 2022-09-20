@@ -8,7 +8,7 @@
 	<title>Aula 3 - Javascript</title>
 	<script>
 		var saldo = 100.5; //Float
-		var senha = 3589;
+		const senha = 3589;
 
         function login() {
 			alert("Bem Vindo ao Banco VH!");
@@ -27,26 +27,31 @@
 			switch(escolha) {
   				case 1: escolha === 1;
 				    var password = parseInt(prompt("Digite sua senha"));
-				    if (password == 3589){ 
-						alert("Senha Incorreta")
-						ver_saldo();
-					}
-				    else{ inicio();}
+				    if (password == 3589){ ver_saldo();}
+				    else{ alert("Senha Incorreta"); inicio();}
    					break;
 			    case 2: escolha === 2;
-				 	extrato();
+				    var password = parseInt(prompt("Digite sua senha"));
+				    if (password == 3589){ extrato(); }
+				    else{ alert("Senha Incorreta"); inicio();}
    					break;
 				case 3: escolha === 3;
-				  	checar_saque();
-   					break;
-				case 4: escolha === 4;
-				    fazer_deposito();
-   					break;
-			    case 5: escolha === 5;
 				    transferencia();
    					break;
+				case 4: escolha === 4;
+				    var password = parseInt(prompt("Digite sua senha"));
+				    if (password == 3589){ fazer_deposito(); }
+				    else{ alert("Senha Incorreta"); inicio();}
+   					break;
+			    case 5: escolha === 5;
+				    var password = parseInt(prompt("Digite sua senha"));
+				    if (password == 3589){ transferencia(); }
+				    else{ alert("Senha Incorreta"); inicio();}
+   					break;
 			    case 6: escolha === 6;
-				  	checar_saque();
+				    var password = parseInt(prompt("Digite sua senha"));
+				    if (password == 3589){ checar_saque(); }
+				    else{ alert("Senha Incorreta"); inicio();}
    					break;
  				default:
 				 	erro();}
@@ -80,7 +85,7 @@
 		 //------------------------------------------------------------------------;
 		function checar_saque() {
 			var saque = parseFloat(prompt('Qual o valor para saque?'));
-			if (saque <= saldo){ fazer_saque(saque);} 
+			if (saque <= saldo || saque > 0 ) { fazer_saque(saque);} 
 			else{ 
 				alert("Operação não autorizada");
 				checar_saque();
@@ -105,26 +110,29 @@
 		}
 		 //------------------------------------------------------------------------;
 		function transferencia() {
-			var trasnfer = parseFloat(prompt('Informe o numero da conta bancaria que ira receber o valor'));
-			if (trasnfer >= 1 || !isNaN(trasnfer) || !trasnfer === ''){ 
-				checar_transferencia();
-			} 
-			else{ 
+		var contabanco = parseInt(prompt("Informe o numero da conta bancaria que ira receber o valor"));
+			if (isNaN(contabanco) || contabanco === ''){
 				alert("Operação não autorizada");
-				transferencia();
+				transferencia();			
+			} 
+			else{
+				checar_transferencia();
 			}
 		}
 		function checar_transferencia() {
 			var trasnfer = parseFloat(prompt('Qual o valor para transfencia?'));
-			if (trasnfer <= saldo){ fazer_transferencia(trasnfer);} 
-			else{ 
+			if (trasnfer <= saldo && trasnfer > 0 ){ 
+				alert('Transferencia realizada com Sucesso');
+				saldo -= trasnfer; 
+				ver_saldo();
+			} else{ 
 				alert("Operação não autorizada");
-				checar_transferencia();
+				transferencia();
 			}
 		}
 		function fazer_transferencia(trasnfer) {
-			if (isNaN(trasnfer) || trasnfer === '') { // Not a Number
-				alert('Por favor, informe um número:');
+			if (isNaN(trasnfer) || trasnfer === ''|| trasnfer > 0) { // Not a Number
+				alert("Operação não autorizada");
 				checar_transferencia();
 			} else { //saldo = saldo - saque;
 				alert('Transferencia realizada com Sucesso');
